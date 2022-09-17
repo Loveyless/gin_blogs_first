@@ -28,6 +28,13 @@ func RegisterUser(c *gin.Context) {
 //登录
 func Login(c *gin.Context) {
 
+	// buf := make([]byte, 2048)
+	// n, _ := c.Request.Body.Read(buf)
+	// fmt.Println("原始请求数据", string(buf[0:n]))
+
+	s := c.Request.Header.Get("Content-Type")
+	fmt.Println(s)
+
 	user := model.User{}
 	c.ShouldBind(&user)
 

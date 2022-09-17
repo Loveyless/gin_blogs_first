@@ -27,8 +27,8 @@ instance.interceptors.request.use(
     }
 
     // 打印请求
-    // console.log("请求地址", config.baseURL, config.method, config.url);
     console.log("-------------------");
+    console.log("地址", config.method, config.url);
     console.log("请求头", config.headers);
     console.log("请求参数", config.data);
 
@@ -48,17 +48,15 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
     const { data, config } = response;
-
+    // 在请求结束后，移除本次请求
+    axiosCanceler.removePending(config);
+    
     closeLoading();
     NProgress.done();
 
-    // 打印返回值
-    console.log("请求没32131231212121213213");
-
-    console.log("请求结果", response.data);
-    // 在请求结束后，移除本次请求
-    axiosCanceler.removePending(config);
+    console.log("请求结果", response.data, typeof response.data);
     return response;
+    1;
   },
   (err: AxiosError) => {
     closeLoading();
