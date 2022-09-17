@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"fmt"
 	"log"
 
 	"gin_blogs_first/model"
@@ -52,20 +51,19 @@ func (mgr *manager) RegisterUser(user *model.User) bool {
 
 	//检测是否已经注册
 	var userList model.User
-	mgr.db.Where("username = ", user.Username).Find(&userList) //这里的first(user) 为什么要传这个user 可能是表示那个表?
-	fmt.Printf("查到了%T行", userList)
-	// if userList > 0 {
-	// 	return false
-	// } else {
-	// 	//添加数据
-	// 	mgr.db.Create(user)
-	return true
-	// }
+	d := mgr.db.Where("username = ?", user.Username).Find(&userList) //这里的first(user) 为什么要传这个user 可能是表示那个表?
+	if d.RowsAffected > 0 {
+		return false
+	} else {
+		//添加数据
+		mgr.db.Create(user)
+		return true
+	}
 }
 
 //登录
 func (mgr *manager) Login(username string) model.User {
 	var user model.User
-	mgr.db.Where("username = ", username).First(&user)
+	mgr.db.Where("username = ?", username).First(&user)
 	return user
 }

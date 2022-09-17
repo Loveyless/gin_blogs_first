@@ -38,5 +38,6 @@ let instance = axios.create({
   // cancelToken: new CancelToken(function (cancel) {}),
 });
 
+instance.defaults.headers.post["Content-Type"] = "application/json; charset=utf-8";
 
 export default instance;

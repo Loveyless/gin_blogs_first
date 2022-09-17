@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"gin_blogs_first/dao"
 	"gin_blogs_first/model"
 
@@ -26,17 +27,29 @@ func RegisterUser(c *gin.Context) {
 
 //登录
 func Login(c *gin.Context) {
-	user := model.User{}
-	c.BindJSON(&user)
-	u := dao.Mgr.Login(user.Username)
 
+	user := model.User{}
+	c.ShouldBind(&user)
+
+	fmt.Println("拿到的请求数据")
+	fmt.Println(user.Username)
+	fmt.Println(user.Password)
+	//查这个用户名
+	u := dao.Mgr.Login(user.Username)
+	// 对比
 	if u.Username == "" {
 		c.JSON(400, gin.H{
 			"message": "无此用户",
 		})
 	} else {
-		c.JSON(200, gin.H{
-			"message": user.Username + "欢迎登录",
-		})
+		if u.Password == user.Password {
+			c.JSON(200, gin.H{
+				"message": user.Username + "欢迎登录",
+			})
+		} else {
+			c.JSON(400, gin.H{
+				"message": "用户名或密码错误",
+			})
+		}
 	}
 }

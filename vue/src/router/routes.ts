@@ -44,14 +44,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/layout/index.vue"),
     redirect: "/layout/home",
     children: [
-      { path: "home", name: "主页", component: () => import("@v/Home/index.vue") },
-      { path: "father_son", name: "父子之间", component: () => import("@v/FatherSon/Father.vue") },
-      { path: "show_images", name: "图片插件+封装图片组件", component: () => import("@v/ShowImages/index.vue") },
-      { path: "slot", name: "插槽", component: () => import("@v/Slot/FatherSlot.vue") },
-      { path: "editor", name: "富文本", component: () => import("@v/WangEditor/index.vue") },
-      { path: "list_wuhu", name: "动态菜单", component: () => import("@v/TestTemplate/ListWuhu!.vue") },
-      { path: "test_demo", name: "pinia-setup和dialog组件", component: () => import("@v/TestDemo/index.vue") },
-      { path: "provide_inject", name: "依赖注入", component: () => import("@v/Provide&Inject/index.vue") },
+      {
+        path: "home",
+        name: "主页",
+        component: () => import("@v/Home/index.vue"),
+        meta: { noLoading: false, noNProgress: false, noKeepAlive: true },
+      },
     ],
   },
   {

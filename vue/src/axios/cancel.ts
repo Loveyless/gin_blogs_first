@@ -25,7 +25,7 @@ export class AxiosCanceler {
     this.removePending(config);
     // 获取序列化
     const url = getPendingUrl(config);
-    console.log("序列化参数",url);
+    // console.log("序列化参数",url);
     // 如果没有就赋值一个cancelToken
     config.cancelToken = config.cancelToken || new axios.CancelToken((cancel) => {
         //斌且如果map中没有则添加进去
