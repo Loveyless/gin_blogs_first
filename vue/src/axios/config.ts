@@ -7,27 +7,27 @@ let instance = axios.create({
   // 跨域时候允许携带凭证
   withCredentials: true,
 
-  // 允许在向服务器发送前，修改请求数据
-  transformRequest: [
-    function (data, headers) {
-      // 对 data 进行任意转换处理
+  // // 允许在向服务器发送前，修改请求数据
+  // transformRequest: [
+  //   function (data, headers) {
+  //     // 对 data 进行任意转换处理
 
-      // return new ArrayBuffer(data);
-      return JSON.stringify(data);
-    },
-  ],
+  //     // return new ArrayBuffer(data);
+  //     return JSON.stringify(data);
+  //   },
+  // ],
 
-  headers: {
-    "Content-Type": "application/json;charset=UTF-8",
-  },
+  // headers: {
+  //   "Content-Type": "application/json;charset=UTF-8",
+  // },
 
-  // 在传递给 then/catch 前，允许修改响应数据
-  transformResponse: [
-    function (data) {
-      // 对 data 进行任意转换处理
-      return JSON.parse(data);
-    },
-  ],
+  // // 在传递给 then/catch 前，允许修改响应数据
+  // transformResponse: [
+  //   function (data) {
+  //     // 对 data 进行任意转换处理
+  //     return JSON.parse(data);
+  //   },
+  // ],
 
   // `onUploadProgress` 允许为上传处理进度事件
   onUploadProgress: function (progressEvent) {

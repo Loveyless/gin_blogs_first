@@ -22,5 +22,9 @@ func Start() {
 	r.POST("/user", controller.RegisterUser)
 	r.POST("/login", controller.Login)
 
+	r.GET("/editor/:pid", controller.GetEditor)
+	r.POST("/editor", controller.AddEditor)
+	r.GET("/editorAllList", controller.GetAllEditor)
+
 	r.Run()
 }

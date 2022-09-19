@@ -7,12 +7,18 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 // 接口
 type Manager interface {
+	//用户
 	RegisterUser(user *model.User) bool //拿到了model里面的User模型
-	Login(username string) model.User
+	Login(username string) APIUser
+	//博客
+	AddEditor(editor *model.Editor) bool
+	GetAllEditor() []model.Editor
+	GetEditor(pid int) model.Editor
 }
 
 type manager struct {
@@ -26,44 +32,24 @@ var Mgr Manager
 func init() {
 
 	dsn := "blogs_first:kM7XaRNxnKjwAHPH@tcp(101.200.243.101:3306)/blogs_first?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// 连接数据库
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info), //打印sql语句
+	})
 	if err != nil {
 		log.Panic("连接mysql数据库失败", err)
 	}
 
+	//根据结构体创建表
+	// 用户数据表
+	if err := db.AutoMigrate(&model.User{}); err != nil {
+		log.Panic("创建User表失败", err)
+	}
+	//博客文章数据表
+	if err := db.AutoMigrate(&model.Editor{}); err != nil {
+		log.Panic("创建Editor表失败", err)
+	}
+
 	//初始化Mgr
 	Mgr = &manager{db}
-
-	//根据结构体创建表
-	if err2 := db.AutoMigrate(&model.User{}); err2 != nil {
-		log.Panic("创建User表失败", err2)
-	}
-
-}
-
-//添加用户
-func (mgr *manager) RegisterUser(user *model.User) bool {
-
-	//必须输入
-	if user.Username == "" || user.Password == "" {
-		return false
-	}
-
-	//检测是否已经注册
-	var userList model.User
-	d := mgr.db.Where("username = ?", user.Username).Find(&userList) //这里的first(user) 为什么要传这个user 可能是表示那个表?
-	if d.RowsAffected > 0 {
-		return false
-	} else {
-		//添加数据
-		mgr.db.Create(user)
-		return true
-	}
-}
-
-//登录
-func (mgr *manager) Login(username string) model.User {
-	var user model.User
-	mgr.db.Where("username = ?", username).First(&user)
-	return user
 }

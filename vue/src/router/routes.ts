@@ -33,7 +33,16 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/login",
     name: "登录",
-    component: () => import("@v/login/index.vue"),
+    component: () => import("@v/Login/index.vue"),
+    meta: {
+      noKeepAlive: true,
+      noRequireAuth: true,
+    },
+  },
+  {
+    path: "/register",
+    name: "注册",
+    component: () => import("@v/Register/index.vue"),
     meta: {
       noKeepAlive: true,
       noRequireAuth: true,
@@ -48,6 +57,12 @@ const routes: Array<RouteRecordRaw> = [
         path: "home",
         name: "主页",
         component: () => import("@v/Home/index.vue"),
+        meta: { noLoading: false, noNProgress: false, noKeepAlive: true },
+      },
+      {
+        path: "write_blog",
+        name: "写博客",
+        component: () => import("@v/WangEditor/index.vue"),
         meta: { noLoading: false, noNProgress: false, noKeepAlive: true },
       },
     ],

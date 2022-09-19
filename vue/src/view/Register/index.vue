@@ -6,7 +6,7 @@
         <template #header>
           <div>
             <div>博客管理系统</div>
-            <div>登录</div>
+            <div>注册</div>
           </div>
         </template>
         <div>
@@ -32,9 +32,9 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click="submitForm(ruleFormRef)" plain>登录</el-button>
+              <el-button type="primary" @click="submitForm(ruleFormRef)" plain>注册</el-button>
               <el-button @click="resetForm(ruleFormRef)">重置</el-button>
-              <el-button @click="() => ($router.push('/register'))">注册</el-button>
+              <el-button @click="() => ($router.push('/login'))">返回登录页</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -47,7 +47,6 @@
 
 <script lang='ts' setup name="login">
 import type { FormInstance, FormRules } from 'element-plus'
-const global = GlobalStore()
 
 const ruleFormRef = ref<FormInstance>()
 const userInfo = reactive<{
@@ -72,22 +71,14 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate(async (valid, fields) => {
     if (valid) {
-      const { data } = await http.post("/login", userInfo, {
+      const data = await http.post("/user", userInfo, {
         headers: {
           loading: false,
           nprogress: false,
         }
       })
 
-      if (data.status == 200) {
-        localStorage.setItem("Id", data.data.Id)
-        global.$patch(state => {
-          state.Id = data.data.Id;
-          state.Username = data.data.Username;
-        })
-        router.push("/layout/home")
-      }
-
+      // router.push("/layout")
     } else {
       console.log('error submit!', fields)
     }

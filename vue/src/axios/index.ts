@@ -4,6 +4,7 @@ import { openLoading, closeLoading } from "@/hooks/loading";
 import NProgress from "@/hooks/nprogress";
 import { Loading } from "@element-plus/icons-vue";
 import { AxiosCanceler } from "@/axios/cancel";
+import { ElMessage } from "element-plus";
 
 //实例化取消请求
 const axiosCanceler = new AxiosCanceler();
@@ -50,11 +51,21 @@ instance.interceptors.response.use(
     const { data, config } = response;
     // 在请求结束后，移除本次请求
     axiosCanceler.removePending(config);
-    
+
     closeLoading();
     NProgress.done();
 
     console.log("请求结果", response.data, typeof response.data);
+    //通知
+    if (data.message) {
+      ElMessage({
+        message: data.message,
+        type: "success",
+        showClose: true,
+        grouping: true,
+        duration: 2000,
+      });
+    }
     return response;
     1;
   },
@@ -65,6 +76,18 @@ instance.interceptors.response.use(
     //后置请求错误
     console.log("后置请求错误", err);
     console.log("后置错误详情", err.response);
+
+    //通知
+    const { data }: any = err.response as any;
+    if (data.message) {
+      ElMessage({
+        message: data.message,
+        type: "error",
+        showClose: true,
+        grouping: true,
+        duration: 2000,
+      });
+    }
     return err;
   }
 );

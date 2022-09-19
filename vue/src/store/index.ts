@@ -5,33 +5,26 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 export const GlobalStore = defineStore(
   "GlobalStore",
   () => {
-    let token = ref<string>("");
+    let Id = ref<string>("");
+    let Username = ref<string>("");
 
-    let count = ref<number>(0);
-    function countAdd(): void {
-      count.value++;
+    function setUsername(value: string) {
+      Username.value = value;
     }
 
-    function doubleCount(): number {
-      return count.value * 2;
-    }
-
-    return { token, count, countAdd, doubleCount };
+    return { Id, Username, setUsername };
   },
   {
     persist: true,
   }
 );
 
-const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
-export default pinia;
-
 // 使用options API模式定义
-// export const Global = defineStore("Global", {
+// export const GlobalStore = defineStore("GlobalStore", {
 //   // 定义state
 //   state: () => ({
-//     count1: 1,
+//     Id: "",
+//     Username: "",
 //   }),
 //   // 定义action
 //   actions: {
@@ -42,7 +35,13 @@ export default pinia;
 //   // 定义getters
 //   getters: {
 //     doubleCount(state) {
-//       return state.count1 * 2;
+//       return state.Id;
 //     },
 //   },
+//   persist: true,
 // });
+
+const pinia = createPinia();
+//注册持久化插件
+pinia.use(piniaPluginPersistedstate);
+export default pinia;

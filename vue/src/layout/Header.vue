@@ -3,7 +3,7 @@
   <el-menu default-active="/layout/home" mode="horizontal" menu-trigger="click" router>
     <el-sub-menu index="">
       <template #title>vue api</template>
-      <el-menu-item v-for="item in $router.options.routes[2].children" :index="'/layout/' + item.path">{{ item.name }}
+      <el-menu-item v-for="item in $router.options.routes[3].children" :index="'/layout/' + item.path">{{ item.name }}
       </el-menu-item>
     </el-sub-menu>
   </el-menu>
