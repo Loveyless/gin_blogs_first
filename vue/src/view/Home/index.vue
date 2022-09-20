@@ -11,13 +11,34 @@
     </a>
   </div>
 
-  <div>
-    
+  <div class="text-left">
+    <div class="bg-yellow-300" v-for="item in bloglist" :key="item.ID">
+      <div>用户:{{item.user_id}}</div>
+      <div>创建时间:{{item.CreatedAt}}</div>
+      <div v-html="item.Content"></div>
+    </div>
   </div>
 
 </template>
 
 <script lang='ts' setup name="home">
+// {
+// "ID": 2,
+// "CreatedAt": "2022-09-19T16:23:26.081+08:00",
+// "UpdatedAt": "2022-09-19T16:23:26.081+08:00",
+// "DeletedAt": null,
+// "user_id": "17",
+// "Content": "弹道内膜癌烦恼烦恼岸防泼",
+// "Tag": ""
+// }
+const bloglist = ref<any>([])
+//获取列表
+async function getBlogList() {
+  const { data } = await http.get("/editorAllList")
+  bloglist.value = data.data
+}
+getBlogList()
+
 </script> 
 
 <style lang='less' scoped>

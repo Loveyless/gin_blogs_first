@@ -4,7 +4,6 @@ declare global {
   const AllRoute: typeof import('./src/router/routes')['AllRoute']
   const AxiosCanceler: typeof import('./src/axios/cancel')['AxiosCanceler']
   const EffectScope: typeof import('vue')['EffectScope']
-  const Global: typeof import('./src/store/index')['Global']
   const GlobalStore: typeof import('./src/store/index')['GlobalStore']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
