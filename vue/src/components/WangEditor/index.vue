@@ -193,36 +193,25 @@ const customPaste = (editor: any, event: any, callback: any) => {
 
 
 
+
+
+
+/**
+ * 以下为组件 接受项 导出项
+ */
+
 const props = withDefaults(defineProps<{ height?: string }>(), { height: '700px' })
-
-
-
-//组件相关
-
-const emit = defineEmits<{
-  (e: "getEditor", editor: any): void;
-  (e: "getEditorHtml", html: string): void;
-}>()
-
-//获取编辑器实例 字符串
-function getEditor() {
-  emit('getEditor', editorRef.value)
-}
-
-//获取编辑器html 字符串
-// function getEditorHtml() {
-//   emit('getEditorHtml', editorRef.value.getHtml())
-// }
 
 //更改编辑器html 字符串
 function setEditorHtml(html: string) {
   valueHtml.value = html
 }
 
-//导出 模板内容 和 更改函数
+//导出 模板内容 和 更改函数 获取时无需.value 直接 editorRef.value.valueHtml
 defineExpose({
-  valueHtml,
-  setEditorHtml,
+  editorRef,  //实例
+  valueHtml,  //内容
+  setEditorHtml, //更改内容
 })
 </script> 
 

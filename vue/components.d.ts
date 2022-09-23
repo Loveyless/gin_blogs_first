@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     Child: typeof import('./src/view/Provide&Inject/child.vue')['default']
     copy: typeof import('./src/view/login copy/index.vue')['default']
     DiaLog: typeof import('./src/components/DiaLog/index.vue')['default']
+    Editor: typeof import('./src/view/Editor/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElContainer: typeof import('element-plus/es')['ElContainer']
@@ -44,7 +45,7 @@ declare module '@vue/runtime-core' {
     SonSlot: typeof import('./src/view/Slot/SonSlot.vue')['default']
     TestDemo: typeof import('./src/view/TestDemo/index.vue')['default']
     Undefined: typeof import('./src/layout/index.vue')['default']
-    WangEditor: typeof import('./src/view/WangEditor/index.vue')['default']
+    WangEditor: typeof import('./src/components/WangEditor/index.vue')['default']
     WriteBlog: typeof import('./src/view/WriteBlog/index.vue')['default']
   }
 }

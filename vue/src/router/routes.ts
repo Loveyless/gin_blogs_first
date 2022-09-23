@@ -62,7 +62,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "write_blog",
         name: "写博客",
-        component: () => import("@v/WangEditor/index.vue"),
+        component: () => import("@v/Editor/index.vue"),
         meta: { noLoading: false, noNProgress: false, noKeepAlive: true },
       },
     ],

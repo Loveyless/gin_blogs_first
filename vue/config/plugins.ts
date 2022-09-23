@@ -109,7 +109,7 @@ export default [
     // enabled by default if `typescript` is installed
     dts: true,
     // relative paths to the directory to search for components.
-    dirs: ["src/layout", "src/view"],
+    dirs: ["src/layout", "src/view" ,"src/components"],
     // RouterLink RouterView 是全局的 但是是ts不友好的所以这里声明一下
     types: [
       {

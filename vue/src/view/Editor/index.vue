@@ -9,20 +9,20 @@
 </template>
 
 <script lang='ts' setup name="wangeditor">
-import WangEditor from "@/components/WangEditor/index.vue"
+// import WangEditor from "@/components/WangEditor/index.vue"
 const global = GlobalStore()
 
 //编辑器实例
 const editorRef = ref<any>('')
 
-//模板字符串
-const HTMlstr = ref<string>("")
-
-
+//预览
 function showHtml() {
 
 }
 
+onMounted(() => {
+  console.log(1)
+})
 
 //发布
 async function submitForm() {
@@ -36,6 +36,9 @@ async function submitForm() {
   }
 }
 
+onMounted(() => {
+  console.log(9)
+})
 </script> 
 
 <style lang="less" scoped>
