@@ -2,7 +2,7 @@ package router
 
 import (
 	"gin_blogs_first/controller"
-	"gin_blogs_first/cors"
+	"gin_blogs_first/myCors"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,12 +11,14 @@ import (
 func Start() {
 	r := gin.Default()
 
-	r.Use(cors.Cors())
+	// 自己写的跨域中间件
+	r.Use(myCors.Cors())
 
+	// gin自带的跨域中间件 (但是还是有问题 不能跨域)
 	// config := cors.DefaultConfig()
 	// config.AllowAllOrigins = true
 	// r.Use(cors.New(config))
-
+	// 等同于上面三行代码的写法
 	// r.Use(cors.Default())
 
 	r.POST("/user", controller.RegisterUser)
